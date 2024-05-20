@@ -24,6 +24,14 @@ public class Phong {
         this.LoaiPhong = LoaiPhong;
     }
 
+    public Phong(int Gia) {
+        this.Gia = Gia;
+    }
+
+    public Phong(int PhongConTrong, boolean isAvailable) {
+         this.PhongConTrong = PhongConTrong;
+    }
+
     public Phong(int PhongID, int SoPhong, int KhuID, String LoaiPhong, int PhongConTrong, int Gia) {
         this.PhongID = PhongID;
         this.SoPhong = SoPhong;
@@ -85,5 +93,5 @@ public class Phong {
     public String toString() {
         return "Phong{" + "PhongID=" + PhongID + ", SoPhong=" + SoPhong + ", KhuID=" + KhuID + ", LoaiPhong=" + LoaiPhong + ", PhongConTrong=" + PhongConTrong + ", Gia=" + Gia + '}';
     }
-
+    
 }

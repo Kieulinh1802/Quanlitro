@@ -286,12 +286,47 @@ public class DAO extends MyDAO {
     }
     return Phongs;
 }
+    
+    public List<Phong> getPhongForGia() {
+    List<Phong> Phongs = new ArrayList<>();
+    String sql = "SELECT DISTINCT Gia FROM Phong";
+    try {
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            int Gia = rs.getInt("Gia");
+            Phong phong = new Phong(Gia);
+            Phongs.add(phong);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return Phongs;
+}
+    
+     public List<Phong> getPhongForTinhTrang() {
+    List<Phong> Phongs = new ArrayList<>();
+    String sql = "SELECT DISTINCT PhongConTrong FROM Phong";
+    try {
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            int PhongConTrong = rs.getInt("PhongConTrong");
+            Phong phong = new Phong(PhongConTrong, true);
+            Phongs.add(phong);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return Phongs;
+}
 
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        String bl = "Đơn";
-        List<Phong> account = dao.getPhongByLoaiPhong(bl);
+        String bt = "0";
+        
+        List<Phong> account = dao.getPhongByTinhTrang(bt);
 
         for (Phong Account : account) {
             System.out.println(Account);

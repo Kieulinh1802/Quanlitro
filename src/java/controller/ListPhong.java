@@ -34,7 +34,8 @@ public class ListPhong extends HttpServlet {
         List<Phong> lp2 = u.getPhong2();
         List<Khu> lk = u.getKhu2();
         List<Phong> bp = u.getPhongForLoaiPhong();
-        List<Phong> ba = u.getPhong();
+        List<Phong> ba = u.getPhongForGia();
+        List<Phong> btt = u.getPhongForTinhTrang();
        
         request.setAttribute("lp", lp);        
         request.setAttribute("lp1", lp1);
@@ -42,6 +43,7 @@ public class ListPhong extends HttpServlet {
         request.setAttribute("lk", lk);
         request.setAttribute("bp", bp);
         request.setAttribute("ba", ba);
+        request.setAttribute("btt", btt);
         
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

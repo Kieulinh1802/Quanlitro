@@ -12,7 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Accounts;
 import model.Khu;
 import model.Phong;
 
@@ -23,27 +25,34 @@ import model.Phong;
 @WebServlet(name = "CategoryKhu", urlPatterns = {"/categorykhu"})
 public class CategoryKhu extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Accounts a = (Accounts) session.getAttribute("acc");
+ 
+         if (a == null || a.getRole() == 1) {
+            // Redirect to login page or show error message if account is not logged in
+            response.sendRedirect("login.jsp");
+        } else {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String ck = request.getParameter("ck"); //edit
         DAO u = new DAO();
 
         List<Phong> listc = u.getPhongByKhuID(ck); //edit
         List<Khu> lk = u.getKhu2();   //edit
-        
+        List<Phong> bp = u.getPhongForLoaiPhong();
+        List<Phong> btt = u.getPhongForTinhTrang();
+        List<Phong> ba = u.getPhongForGia();
+
         request.setAttribute("lp", listc);
         request.setAttribute("lk", lk); //edit
-        request.getRequestDispatcher("index.jsp").forward(request, response);        
+        request.setAttribute("bp", bp);
+        request.setAttribute("btt", btt);
+        request.setAttribute("ba", ba);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -231,8 +231,13 @@
                                     <div id="tinhTrangDropdownMenu" class="hidden absolute bg-success-dark text-white right-0 mt-2 py-2 w-48 border border-red-vibrant-dark">
                                         <c:forEach items="${btt}" var="c">
                                             <li>
-                                                <a class="px-4 py-2 hover:bg-success" href="categoryloaiphong?bt=${c.phongID}">
-                                                    <span class="text-dark" style="width: 130px;">${c.phongConTrong}</span>
+                                                <a class="px-4 py-2 hover:bg-success" href="categorytinhtrang?bt=${c.phongConTrong}">
+                                                    <c:if test="${c.phongConTrong == 0}">
+                                                        <span class="text-dark" style="width: 130px;">Có khách</span>
+                                                    </c:if>
+                                                    <c:if test="${c.phongConTrong == 1}">
+                                                        <span class="text-dark" style="width: 130px;">Trống</span>
+                                                    </c:if>
                                                 </a>
                                             </li>
                                         </c:forEach>
